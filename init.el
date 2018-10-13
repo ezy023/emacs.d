@@ -2,10 +2,11 @@
 
 (setq home-dir (getenv "HOME"))
 
-
-
 (load "package")
 (package-initialize)
+
+;; requires xscheme.elc file in /usr/share/emacs/<version>/lisp/
+(load-library "xscheme")
 
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
