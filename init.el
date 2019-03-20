@@ -114,6 +114,7 @@
 (set-face-foreground 'minibuffer-prompt "green") ; Change prompt text color in minibuffer (where you enter commands, on the bottom...)
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
 ;; Linum Mode
 (global-linum-mode 1)
@@ -162,7 +163,6 @@
             (setq tab-width 4)
             (setq yaml-indent 4)))
 
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -177,3 +177,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Open the man page for the current word at point, if it exists
+(defun open-man-page (term)
+  (interactive (list (current-word nil 't)))
+  (man term))
+
+(global-set-key (kbd "C-c m") 'open-man-page)
