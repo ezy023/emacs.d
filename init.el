@@ -168,6 +168,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-export-backends (quote (ascii html icalendar latex md odt confluence)))
  '(package-selected-packages
    (quote
     (go-mode projectile cider flymake-python-pyflakes paredit clojure-mode ample-zen-theme magit python-mode auto-complete))))
@@ -184,3 +185,6 @@
   (man term))
 
 (global-set-key (kbd "C-c m") 'open-man-page)
+
+;; Disable eldoc mode (python-help)
+(global-eldoc-mode -1)
