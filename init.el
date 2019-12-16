@@ -12,11 +12,20 @@
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 ;; Org mode
-;; (setq org-mode-package-dir (format "%s/dotfiles/emacs.d/org-9.0.8/lisp" home-dir))
-;; (add-to-list 'load-path org-mode-package-dir)
-;; (setq org-mode-conf (format "%s/dotfiles/emacs.d/myorg.el" home-dir))
-;; (load org-mode-conf) ;; load org-mode customizations
+(setq org-mode-package-dir (format "%s/.emacs.d/org/lisp" home-dir))
+(add-to-list 'load-path org-mode-package-dir)
+(require 'ox-confluence)
 
+;;; Load Person .el files
+(setq personal-lisp-files-dir "~/.emacs.d/lisp/")
+(add-to-list 'load-path personal-lisp-files-dir)
+(require 'java-getter-setter)
+
+;; Java Mode Hooks
+(add-hook 'java-mode-hook (lambda ()
+                            (progn
+                              (global-set-key (kbd "C-c j s") 'insert-single-get-and-set) ;; from java-getter-setter
+                              (global-set-key (kbd "C-c j r") 'insert-get-and-set-multiple)))) ;; from java-getter-setter
 
 (require 'ido)
 ;; Enable Ido Everywhere
@@ -79,7 +88,7 @@
 
 (global-set-key (kbd "C-c /") 'comment-or-uncomment-region)
 (global-set-key (kbd "M-/") 'hippie-expand)
-(global-set-key (kbd "C-c b") 'magit-blame-mode)
+(global-set-key (kbd "C-c b") 'magit-blame)
 (global-set-key (kbd "C-c f r") 'replace-string)
 
 ; Packages List
@@ -171,7 +180,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt confluence)))
  '(package-selected-packages
    (quote
-    (go-mode projectile cider flymake-python-pyflakes paredit clojure-mode ample-zen-theme magit python-mode auto-complete))))
+    (dracula-theme nord-theme go-mode projectile cider flymake-python-pyflakes paredit clojure-mode ample-zen-theme magit python-mode auto-complete))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -186,5 +195,17 @@
 
 (global-set-key (kbd "C-c m") 'open-man-page)
 
+;; Define keybinding for org-toggle-link-display when in org-mode
+(with-eval-after-load
+    'org (define-key (current-global-map) (kbd "C-c s l") 'org-toggle-link-display))
+
 ;; Disable eldoc mode (python-help)
 (global-eldoc-mode -1)
+
+;; org-mode set Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (java . t)
+   (C . t)
+   (shell . t)))
