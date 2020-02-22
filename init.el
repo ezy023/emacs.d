@@ -9,14 +9,14 @@
 (load-library "xscheme")
 
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
 
 ;; Org mode
 (setq org-mode-package-dir (format "%s/.emacs.d/org/lisp" home-dir))
 (add-to-list 'load-path org-mode-package-dir)
 (add-hook 'org-mode-hook (lambda ()
                            (setq org-todo-keywords '((sequence "TODO" "FEEDBACK" "|" "DONE")))))
-(require 'ox-confluence)
+;;(require 'ox-confluence)
 
 ;;; Load Person .el files
 (setq personal-lisp-files-dir "~/.emacs.d/lisp/")
@@ -125,6 +125,7 @@
 (set-face-foreground 'minibuffer-prompt "green") ; Change prompt text color in minibuffer (where you enter commands, on the bottom...)
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+(add-hook 'lisp-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
 ;; Linum Mode
@@ -215,4 +216,7 @@
    (java . t)
    (C . t)
    (shell . t)
-   (sql . t)))
+   (sql . t)
+   (emacs-lisp . t)))
+;; org-mode babel tab indents code as if executed in native buffer
+(setq org-src-tab-acts-natively t)
