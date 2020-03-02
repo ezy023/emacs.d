@@ -14,6 +14,8 @@
 ;; Org mode
 (setq org-mode-package-dir (format "%s/.emacs.d/org/lisp" home-dir))
 (add-to-list 'load-path org-mode-package-dir)
+(add-hook 'org-mode-hook (lambda ()
+                           (setq org-todo-keywords '((sequence "TODO" "FEEDBACK" "|" "DONE")))))
 (require 'ox-confluence)
 
 ;;; Load Person .el files
@@ -160,8 +162,12 @@
 (global-set-key (kbd "C-c C-e") 'flymake-popup-current-error-menu)
 
 ;; Go Lang
-(add-hook 'before-save-hook 'gofmt-before-save)
-(add-hook 'go-mode-hook (setq tab-width 4))
+(add-hook 'go-mode-hook (lambda ()
+                          (progn
+                            (add-hook 'go-mode-hook (setq tab-width 4))
+                            (add-hook 'before-save-hook 'gofmt-before-save))))
+
+
 
 ;; yaml-mode
 (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
@@ -208,4 +214,5 @@
  '((python . t)
    (java . t)
    (C . t)
-   (shell . t)))
+   (shell . t)
+   (sql . t)))
