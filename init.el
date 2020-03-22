@@ -104,6 +104,7 @@
 			    cider
                             projectile
                             go-mode
+                            ob-go
                             org)
   "Default packages")
 
@@ -210,6 +211,7 @@
 (global-eldoc-mode -1)
 
 ;; org-mode set Babel languages
+(require 'ob-go)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)
@@ -217,6 +219,7 @@
    (C . t)
    (shell . t)
    (sql . t)
-   (emacs-lisp . t)))
+   (emacs-lisp . t)
+   (go . t)))
 ;; org-mode babel tab indents code as if executed in native buffer
 (setq org-src-tab-acts-natively t)
