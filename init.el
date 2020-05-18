@@ -164,12 +164,11 @@
 (global-set-key (kbd "C-c C-e") 'flymake-popup-current-error-menu)
 
 ;; Go Lang
-(add-hook 'go-mode-hook (lambda ()
-                          (progn
-                            (add-hook 'before-save-hook 'gofmt-before-save))))
-(add-hook 'go-mode-hook #'(lambda () (setq tab-width 4)))
-
-
+(add-hook 'go-mode-hook 'go-hooks)
+(defun go-hooks ()
+  (progn
+    (setq tab-width 4)
+    (add-hook 'before-save-hook 'gofmt-before-save)))
 
 ;; yaml-mode
 (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
