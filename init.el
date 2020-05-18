@@ -16,7 +16,7 @@
 (add-to-list 'load-path org-mode-package-dir)
 (add-hook 'org-mode-hook (lambda ()
                            (setq org-todo-keywords '((sequence "TODO" "FEEDBACK" "|" "DONE")))))
-;;(require 'ox-confluence)
+(add-hook 'org-mode-hook 'visual-line-mode)
 
 ;;; Load Person .el files
 (setq personal-lisp-files-dir "~/.emacs.d/lisp/")
