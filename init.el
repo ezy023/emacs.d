@@ -105,7 +105,8 @@
                             projectile
                             go-mode
                             ob-go
-                            org)
+                            org
+                            geiser)
   "Default packages")
 
 (defun allareri/packages-installed-p ()
@@ -187,7 +188,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt confluence)))
  '(package-selected-packages
    (quote
-    (dracula-theme nord-theme go-mode projectile cider flymake-python-pyflakes paredit clojure-mode ample-zen-theme magit python-mode auto-complete))))
+    (ztree dracula-theme nord-theme go-mode projectile cider flymake-python-pyflakes paredit clojure-mode ample-zen-theme magit python-mode auto-complete))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
