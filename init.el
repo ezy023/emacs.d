@@ -219,6 +219,7 @@
    (shell . t)
    (sql . t)
    (emacs-lisp . t)
-   (go . t)))
+   (go . t)
+   (scheme . t)))
 ;; org-mode babel tab indents code as if executed in native buffer
 (setq org-src-tab-acts-natively t)
