@@ -105,8 +105,7 @@
                             projectile
                             go-mode
                             ob-go
-                            org
-                            geiser)
+                            org)
   "Default packages")
 
 (defun allareri/packages-installed-p ()
