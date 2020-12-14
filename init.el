@@ -1,4 +1,5 @@
 (require 'cl) ; require Common Lisp
+(setq gc-cons-threshold 24000000)
 
 (setq home-dir (getenv "HOME"))
 
@@ -6,7 +7,7 @@
 (package-initialize)
 
 ;; requires xscheme.elc file in /usr/share/emacs/<version>/lisp/
-(load-library "xscheme")
+(add-hook 'scheme-mode-hook (lambda () (load-library "xscheme")))
 
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
@@ -94,14 +95,11 @@
 (global-set-key (kbd "C-c f r") 'replace-string)
 
 ; Packages List
-(defvar allareri/packages '(auto-complete
-			    python-mode
+(defvar allareri/packages '(python-mode
 			    magit
-			    ample-zen-theme
-			    clojure-mode
+                            kaolin-themes
 			    paredit
                             flymake-python-pyflakes
-			    cider
                             projectile
                             go-mode
                             ob-go
@@ -121,8 +119,11 @@
       (package-install pkg))))
 
 
+;; kaolin themes
+(require 'kaolin-themes)
+(load-theme 'kaolin-aurora t)
+
 ; Load Theme
-(load-theme 'ample-zen t)
 (set-face-foreground 'minibuffer-prompt "green") ; Change prompt text color in minibuffer (where you enter commands, on the bottom...)
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
@@ -147,15 +148,6 @@
 (projectile-global-mode)
 (global-set-key (kbd "C-c p f") 'projectile-find-file)
 (add-hook 'python-mode-hook 'projectile-mode)
-
-;; clojure-mode preferences
-(add-hook 'clojure-mode-hook #'paredit-mode)
-
-;; cider-mode preferences (clojure)
-(defun nolinum ()
-  (global-linum-mode 0))
-(add-hook 'cider-mode-hook #'nolinum)
-(add-hook 'cider-repl-mode-hook #'paredit-mode)
 
 ;; flake8
 (autoload 'flymake-python-pyflakes-load "flymake-python-pyflakes" nil t)
@@ -187,7 +179,7 @@
  '(org-export-backends (quote (ascii html icalendar latex md odt confluence)))
  '(package-selected-packages
    (quote
-    (ztree dracula-theme nord-theme go-mode projectile cider flymake-python-pyflakes paredit clojure-mode ample-zen-theme magit python-mode auto-complete))))
+    (ztree go-mode projectile flymake-python-pyflakes paredit ample-zen-theme magit python-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
